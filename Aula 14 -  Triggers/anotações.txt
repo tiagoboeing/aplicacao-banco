@@ -1,0 +1,20 @@
+Uma trigger tem sua execução no banco quando ocorrer:
+
+- INSERT
+- UPDATE
+- DELETE
+
+Somente nestas situações uma trigger pode ser iniciada. Um trigger está associada a um comando que vem para o banco. Esta instrução são os três eventos (INSERT, UPDATE E DELETE)
+Uma trigger só pode estar associada a uma tabela. Ao codificar uma trigger no cabeçalho deve-se dizer que ela será disparada em um evento INSERT  de determinada tabela x. Ela só pode ser utilizada em uma tabela.
+Ao enviar um INSERT para uma tabela, a trigger é disparada, pode-se programar o disparo da trigger antes do INSERT ser efetivado ou depois.
+
+Ex.: ao mandar cadastrar um cliente, posso programar a trigger para disparar antes do cadastro ou imediatamente após.
+
+Momentos para acontecer trigger:
+
+- ANTES DO EVENTO (BEFORE)
+- APÓS O EVENTO (AFTER)
+
+Ex.: quando for enviado um DELETE para tabela VENDA, apaga as parcelas dependentes, para que o usuário não precise apagar as parcelas manualmente ou um erro seja causado.
+
+Terceira avaliação - dia 29/11
