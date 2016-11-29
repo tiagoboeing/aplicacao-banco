@@ -1,0 +1,35 @@
+CREATE OR REPLACE FUNCTION num_supervisores RETURN VARCHAR IS
+  CURSOR VENDEDOR_CUR IS
+    SELECT CD_VDD
+    FROM VENDEDOR
+    ORDER BY CD_VDD;
+    
+    NOVA_NR_SUPERVISOR NUMBER(3);
+    NOVA_QUANT_VENDAS NUMBER(4);
+  
+BEGIN
+  NOVA_NR_SUPERVISOR := 0;
+
+  FOR contador IN VENDEDOR_CUR LOOP
+    
+    SELECT COUNT(*)
+    INTO NOVA_QUANT_VENDAS
+    FROM VENDA V, VENDEDOR VDD, VENDEDOR SUP
+    WHERE vdd.cd_supervisor = sup.cd_vdd
+      and v.cd_vdd = vdd.cd_vdd
+      and sup.cd_vdd = contador.cd_vdd
+      and to_char(dt_ven,'yyyy') = 2006;
+      
+    IF NOVA_QUANT_VENDAS = 0 THEN
+      NOVA_NR_SUPERVISOR := NOVA_NR_SUPERVISOR + 1;
+    END IF;
+      
+  END LOOP;
+  
+  IF NOVA_NR_SUPERVISOR = 0 THEN
+    DBMS_OUTPUT.PUT_LINE('NENHUM NESTA SITUAÇÃO!');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE(NOVA_NR_SUPERVISOR);
+  END IF;
+
+END;
